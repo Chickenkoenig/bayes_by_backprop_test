@@ -1,37 +1,32 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import model
 import data_plotter
 import data_generator
+import hydra
+from omegaconf import DictConfig, OmegaConf
+import wandb
 
-def main():
-    data = data_generator.generate_data(data_generator.noisy_target, -2, 2, 500)
+@hydra.main(config_path="../config", config_name="main", version_base="1.1")
+def main(cfg: DictConfig):
+    config_dict = OmegaConf.to_container(cfg, resolve=True)
+
+    wandb.init(project='bayes_by_backprop_test', config=config_dict)
+
+    data = data_generator.generate_data(getattr(data_generator, cfg.data.noisy_target),
+                                        cfg.data.x_start, cfg.data.x_end, cfg.data.num_train_points)
     data_plotter.plot_dataset(data)
-    bnn_model = model.get_model()
-    model.train_model(bnn_model, data, 2000, 0.01, 0.01)
+    bnn_model = model.get_model(cfg)
 
-    x_test, y_test = data_generator.generate_data(data_generator.noisy_target, -2, 2, 300)
+    wandb.watch(bnn_model, log='all')
+    model.train_model(bnn_model, data, cfg.train.epochs, cfg.train.learning_rate, cfg.train.kl_weight)
 
+    # generate test data
+    x_test, y_test = data_generator.generate_data(getattr(data_generator, cfg.data.noisy_target),
+                                        cfg.data.x_start, cfg.data.x_end, cfg.data.num_test_points)
 
-    models_result = np.array([bnn_model(x_test).data.numpy() for k in range(10000)])
-    models_result = models_result[:, :, 0]
-    models_result = models_result.T
-    mean_values = np.array([models_result[i].mean() for i in range(len(models_result))])
-    std_values = np.array([models_result[i].std() for i in range(len(models_result))])
+    mean_values, std_values = model.evaluate_model(bnn_model, x_test)
 
-    #plot confidence intervalls
-    plt.figure(figsize=(10, 8))
-    plt.plot(x_test.data.numpy(), mean_values, color='navy', lw=3, label='Predicted Mean Model')
-    plt.fill_between(x_test.data.numpy().T[0], mean_values - 3.0 * std_values, mean_values + 3.0 * std_values,
-                     alpha=0.2, color='navy', label='99.7% confidence interval')
-    # plt.plot(x_test.data.numpy(),mean_values,color='darkorange')
-    plt.plot(x_test.data.numpy(), y_test.data.numpy(), '.', color='darkorange', markersize=4, label='Test set')
-    plt.plot(x_test.data.numpy(), data_generator.clean_target(x_test).data.numpy(), color='green', markersize=4,
-             label='Target function')
-    plt.legend()
-    plt.xlabel('x')
-    plt.ylabel('y')
-    plt.show()
+    data_plotter.plot_model_results(x_test,y_test,mean_values,std_values, getattr(data_generator, cfg.data.ground_truth), cfg)
+    wandb.finish()
 
 if __name__ == '__main__':
     main()

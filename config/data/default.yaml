@@ -1,0 +1,6 @@
+x_start: -2
+x_end: 2
+num_train_points: 500
+num_test_points: 300
+ground_truth: 'clean_target'
+noisy_target: 'noisy_target'

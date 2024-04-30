@@ -1,4 +1,0 @@
-name: tds_article
-x_start: "-2"
-x_end: "2"
-target: "x.pow(5) -10* x.pow(1)"

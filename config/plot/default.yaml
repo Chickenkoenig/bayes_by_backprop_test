@@ -1,0 +1,9 @@
+figsize: [10,8]
+colors:
+  mean: 'navy'
+  confidence: 'navy'
+  test_set: 'darkorange'
+  target_function: 'green'
+linewidth: 3
+markersize: 4
+alpha: 0.2
