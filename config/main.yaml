@@ -1,5 +1,5 @@
 defaults:
   - data: default
-  - model: bnn
+  - model: dropout
   - plot: default
-  - train: default
+  - train: dropout_train

@@ -1,7 +1,7 @@
 import torch
 import matplotlib.pyplot as plt
 
-def generate_data(func, x_start, x_end, n_points):
+def generate_data(func, x_start, x_end, n_points, gap_):
     x = torch.linspace(x_start, x_end, n_points)
     y = func(x)
     x = torch.unsqueeze(x, dim=1)
@@ -12,6 +12,7 @@ def generate_data(func, x_start, x_end, n_points):
 def clean_target(x):
     return x.pow(5) -10* x.pow(1)+1
 
+#TODO cutout area, not equally distributed noise
 def noisy_target(x):
     return x.pow(5) -10* x.pow(1) + 2*torch.rand(x.size())
 
