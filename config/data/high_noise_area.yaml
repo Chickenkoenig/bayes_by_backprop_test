@@ -7,4 +7,4 @@ gap: false
 gap_start: null
 gap_end: null
 ground_truth: 'clean_target'
-noisy_target: 'noisy_target'
+noisy_target: 'noisy_target_high_noise_area'

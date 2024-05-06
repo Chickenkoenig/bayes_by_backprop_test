@@ -1,5 +1,5 @@
 defaults:
-  - data: default
+  - data: linear
   - model: dropout
   - plot: default
   - train: dropout_train

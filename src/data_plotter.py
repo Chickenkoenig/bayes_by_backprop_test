@@ -25,3 +25,4 @@ def plot_model_results(x_test, y_test, mean_values, std_values, clean_target_fun
     wandb.log({"Prediction Plot": wandb.Image(plt)})
 
     plt.show()
+

@@ -1,3 +1,4 @@
+import torch
 import torch.nn as nn
 import torch.optim as optim
 import torchbnn as bnn
@@ -28,7 +29,7 @@ class BBBModel(nn.Module):
     def forward(self, x):
         return self.model(x)
 
-    def train_model(self, data, epochs, cfg):
+    def train_model(self, data, val_data, cfg):
         x, y = data
         optimizer = optim.Adam(self.parameters(), lr=cfg.train.learning_rate)
         mse_loss = nn.MSELoss()
@@ -44,7 +45,7 @@ class BBBModel(nn.Module):
             cost.backward()
             optimizer.step()
 
-            if step % 100 == 0 or step == epochs - 1:
+            if step % 100 == 0 or step == cfg.train.epochs - 1:
                 wandb.log({
                     "epoch": step,
                     "mse": mse.item(),
@@ -54,6 +55,7 @@ class BBBModel(nn.Module):
                 print(f'Epoch{step}: MSE={mse.item():.2f}, KL={kl.item():.2f}')
 
     def evaluate_model(self, x_test, num_samples=10000):
+        """
         # performs 10000 forward passes for each test data point through the trained model
         models_result = np.array([self(x_test).data.numpy() for k in range(num_samples)])
         models_result = models_result[:, :, 0]
@@ -63,3 +65,9 @@ class BBBModel(nn.Module):
         mean_values = np.array([models_result[i].mean() for i in range(len(models_result))])
         std_values = np.array([models_result[i].std() for i in range(len(models_result))])
         return mean_values, std_values
+        """
+        with torch.no_grad():
+            predictions = torch.stack([self(x_test) for _ in range(num_samples)], dim=0)
+        mean_values = predictions.mean(dim=0).squeeze()
+        std_values = predictions.std(dim=0).squeeze()
+        return mean_values.numpy(), std_values.numpy()
