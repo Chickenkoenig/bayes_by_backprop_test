@@ -55,19 +55,8 @@ class BBBModel(nn.Module):
                 print(f'Epoch{step}: MSE={mse.item():.2f}, KL={kl.item():.2f}')
 
     def evaluate_model(self, x_test, num_samples=10000):
-        """
-        # performs 10000 forward passes for each test data point through the trained model
-        models_result = np.array([self(x_test).data.numpy() for k in range(num_samples)])
-        models_result = models_result[:, :, 0]
-        models_result = models_result.T
-
-        # Computes the mean and standard deviation across the 10000 for each test input
-        mean_values = np.array([models_result[i].mean() for i in range(len(models_result))])
-        std_values = np.array([models_result[i].std() for i in range(len(models_result))])
-        return mean_values, std_values
-        """
         with torch.no_grad():
             predictions = torch.stack([self(x_test) for _ in range(num_samples)], dim=0)
         mean_values = predictions.mean(dim=0).squeeze()
         std_values = predictions.std(dim=0).squeeze()
-        return mean_values.numpy(), std_values.numpy()
+        return mean_values, std_values

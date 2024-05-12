@@ -43,7 +43,7 @@ class MCDropoutNet(nn.Module):
     def train_model(self, train_data, val_data, cfg):
         x, y = train_data
         x_val, y_val = val_data
-        optimizer = optim.Adam(self.parameters(), lr=cfg.train.learning_rate)
+        optimizer = optim.Adam(self.parameters(), lr=cfg.train.learning_rate, weight_decay=1e-6)
         mse_loss = nn.MSELoss()
 
         for step in range(cfg.train.epochs):
@@ -99,6 +99,6 @@ class MCDropoutNet(nn.Module):
         plt.title('Scatter Plot of All Predictions for Each Input')
         plt.show()
         """
-        return mean_values.numpy(), std_values.numpy()
+        return mean_values, std_values
 
 
