@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
 import wandb
 
-def plot_dataset(data):
+def plot_dataset(data, title):
     x, y = data
     plt.scatter(x.data.numpy(), y.data.numpy())
-    plt.title("Scatter plot of dataset")
+    plt.title(title)
     plt.xlabel("x")
     plt.ylabel("y")
     plt.show()
