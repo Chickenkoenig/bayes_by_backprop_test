@@ -1,5 +1,5 @@
 defaults:
-  - data: sin_gap
-  - model: bbb
+  - data: large_sin_gap
+  - model: swag
   - plot: default
-  - train: bbb_train
+  - train: swag_train
