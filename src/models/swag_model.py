@@ -54,7 +54,7 @@ class SwagModel(nn.Module):
                 "val_loss": loss_val.item()
             })
             print(f'Epoch{epoch}: Train MSE={loss_train.item():.2f}, Val MSE={loss_val.item():.2f}')
-            self.complete_epoch()
+            self.swag_update()
 
     def swag_update(self):
         self.steps += 1
@@ -68,8 +68,7 @@ class SwagModel(nn.Module):
                 self.sq_means = (self.sq_means * (self.steps - self.swag_start) + params.square()) / (self.steps - self.swag_start + 1)
             self.deviations.append(params - self.mean)
 
-    def complete_epoch(self):
-        self.swag_update()
+
 
     def sample_parameters(self):
         mean = self.mean
