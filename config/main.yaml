@@ -1,5 +1,16 @@
 defaults:
   - data: large_sin_gap
-  - model: swag
+  - model: bbb
   - plot: default
-  - train: swag_train
+  - train: ${model}/${data}
+  - ensemble: null
+
+use_ensemble: true
+
+
+
+ensemble:
+  models:
+    - bbb
+    - dropout
+    - swag

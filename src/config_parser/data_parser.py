@@ -1,4 +1,4 @@
-import src.data_generator as data_generator
+import src.data.data_generator as data_generator
 
 def get_data(cfg):
     x_train, y_train = get_train_data(cfg)

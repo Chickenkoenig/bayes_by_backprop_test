@@ -1,4 +1,4 @@
-name: 'sin_gap'
+name: 'large_sin_gap'
 x_start: -6
 x_end: 6
 x_test_start: -8

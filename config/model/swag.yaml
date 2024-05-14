@@ -1,6 +1,6 @@
 type: 'swag'
-swag_start: 7000
 update_interval: 5
+max_cols: 5
 layers:
   - {type: 'Linear', in_features: 1, out_features: 300}
   - {type: 'ReLU'}

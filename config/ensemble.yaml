@@ -1,0 +1,9 @@
+defaults:
+  - data: large_sin_gap
+  - plot: default
+  - train: default
+
+models:
+  - bbb
+  - dropout
+  - swag
