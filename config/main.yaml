@@ -3,10 +3,9 @@ defaults:
   - model: bbb
   - plot: default
   - train: ${model}/${data}
-  - ensemble: null
+
 
 use_ensemble: true
-
 
 
 ensemble:

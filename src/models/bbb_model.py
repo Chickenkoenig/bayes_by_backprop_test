@@ -47,10 +47,10 @@ class BBBModel(nn.Module):
 
             if step % 100 == 0 or step == cfg.train.epochs - 1:
                 wandb.log({
-                    "epoch": step,
-                    "mse": mse.item(),
-                    "kl_divergence": kl.item(),
-                    "total_cost": cost.item()
+                    "epoch_bbb": step,
+                    "mse_bbb": mse.item(),
+                    "kl_divergence_bbb": kl.item(),
+                    "total_cost_bbb": cost.item()
                 })
                 print(f'Epoch{step}: MSE={mse.item():.2f}, KL={kl.item():.2f}')
 

@@ -59,9 +59,9 @@ class MCDropoutNet(nn.Module):
                 loss_val = mse_loss(predictions_val, y_val)
 
             wandb.log({
-                "epoch": step,
-                "train_loss": loss_train.item(),
-                "val_loss": loss_val.item()
+                "epoch_dropout": step,
+                "train_loss_dropout": loss_train.item(),
+                "val_loss_dropout": loss_val.item()
             })
             print(f'Epoch{step}: Train MSE={loss_train.item():.2f}, Val MSE={loss_val.item():.2f}')
 

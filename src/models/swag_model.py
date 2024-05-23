@@ -57,9 +57,9 @@ class SwagModel(nn.Module):
                 loss_val = mse_loss(predictions_val, y_val)
 
             wandb.log({
-                "epoch": epoch,
-                "train_loss": loss_train.item(),
-                "val_loss": loss_val.item()
+                "epoch_swag": epoch,
+                "train_loss_swag": loss_train.item(),
+                "val_loss_swag": loss_val.item()
             })
             print(f'Epoch{epoch}: Train MSE={loss_train.item():.2f}, Val MSE={loss_val.item():.2f}')
             self.swag_update()
