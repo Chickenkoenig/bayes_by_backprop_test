@@ -4,7 +4,7 @@ import wandb
 import utils.train_utils as train_utils
 
 
-@hydra.main(config_path="../config", config_name="main", version_base="1.1")
+@hydra.main(config_path="../config2", config_name="main", version_base="1.1")
 def main(cfg: DictConfig):
     config_dict = OmegaConf.to_container(cfg, resolve=True)
     wandb.init(project='test_uncertainty_estimation',

@@ -1,0 +1,8 @@
+# Bayesian Neural Network specific parameters
+type: 'bbb'
+activation: ???
+kl_weight: ???
+layers:
+  - {type: 'BayesLinear', prior_mu: 0, prior_sigma: 0.1, in_features: 1, out_features: 1000}
+  - {type: ${activation}}
+  - {type: 'BayesLinear', prior_mu: 0, prior_sigma: 0.1, in_features: 1000, out_features: 1}

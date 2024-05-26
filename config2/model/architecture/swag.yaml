@@ -1,0 +1,8 @@
+type: 'swag'
+update_interval: ???
+max_cols: ???
+activation: ???
+layers:
+  - {type: 'Linear', in_features: 1, out_features: 300}
+  - {type: ${activation}}
+  - {type: 'Linear', in_features: 300, out_features: 1}
