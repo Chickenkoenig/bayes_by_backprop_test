@@ -1,0 +1,5 @@
+wandb:
+  project: test_uncertainty_estimation
+  group: ${exp_name}
+  job_type: ???
+  run_name: seed_${seed}

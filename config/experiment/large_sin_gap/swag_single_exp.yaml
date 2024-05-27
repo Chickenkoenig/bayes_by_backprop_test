@@ -7,14 +7,19 @@ defaults:
 
 exp_name: large_sin_gap_swag_single
 
+recorder:
+  wandb:
+    job_type: epochs-${train.epochs}_lr-${train.learning_rate}_activation-${model.architecture.activation}_use_low_rank-${train.use_low_rank}
+
+
 hydra:
   mode: MULTIRUN
   sweeper:
     params:
-      model.architecture.activation: 'ReLU'
+      model.architecture.activation: ReLU, Tanh
       model.architecture.update_interval: 5
       model.architecture.max_cols: 5
-      train.swag_start: 6000
-      train.use_low_rank: true
-      train.epochs: 8000
-      train.learning_rate: 0.01
+      train.swag_start: 8000
+      train.use_low_rank: false, true
+      train.epochs: 10000, 15000, 20000
+      train.learning_rate: 0.01, 0.001

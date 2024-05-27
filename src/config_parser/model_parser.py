@@ -38,6 +38,8 @@ def parse_model_layers(cfg):
             )
         elif layer_cfg.type == 'ReLU':
             layer = nn.ReLU()
+        elif layer_cfg.type == 'Tanh':
+            layer = nn.Tanh()
         elif layer_cfg.type == 'MCDropoutLayer':
             layer = MCDropoutLayer(cfg.model.architecture.dropout_prob)
         elif layer_cfg.type == 'BayesLinear':

@@ -3,7 +3,13 @@ defaults:
   - model: ???
   - model/architecture: ???
   - plot: default
+  - recorder: standard_wandb
   - train: ???
+
+
+seed: ???
+
+
 
 
 
