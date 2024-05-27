@@ -7,24 +7,11 @@ import wandb
 
 
 class BBBModel(nn.Module):
-    def __init__(self, cfg):
+    def __init__(self, cfg, layers):
         super().__init__()
-        self.layers = nn.ModuleList()
-        for layer_cfg in cfg.model.layers:
-            if layer_cfg.type == 'BayesLinear':
-                layer = bnn.BayesLinear(
-                    prior_mu=layer_cfg.prior_mu,
-                    prior_sigma=layer_cfg.prior_sigma,
-                    in_features=layer_cfg.in_features,
-                    out_features=layer_cfg.out_features
-                )
-            elif layer_cfg.type == 'ReLU':
-                layer = nn.ReLU()
-            else:
-                raise ValueError(f"Unsupported layer type: {layer_cfg.type}")
-            self.layers.append(layer)
+        self.layers = layers
         self.model = nn.Sequential(*self.layers)
-        self.kl_weight = cfg.model.kl_weight
+        self.kl_weight = cfg.model.architecture.kl_weight
 
     def forward(self, x):
         return self.model(x)

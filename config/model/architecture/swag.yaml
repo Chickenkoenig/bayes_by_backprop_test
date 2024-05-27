@@ -1,6 +1,7 @@
 type: 'swag'
 update_interval: ???
 max_cols: ???
+
 activation: ???
 layers:
   - type: 'Linear'

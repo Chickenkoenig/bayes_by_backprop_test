@@ -4,25 +4,15 @@ import torch.optim as optim
 import wandb
 
 class SwagModel(nn.Module):
-    def __init__(self, cfg):
+    def __init__(self, cfg, layers):
         super(SwagModel, self).__init__()
-        self.layers = nn.ModuleList()
-        for layer_cfg in cfg.model.layers:
-            if layer_cfg.type == 'Linear':
-                layer = nn.Linear(
-                    in_features=layer_cfg.in_features,
-                    out_features=layer_cfg.out_features
-                )
-            elif layer_cfg.type == 'ReLU':
-                layer = nn.ReLU()
-            else:
-                raise ValueError(f"Unsupported layer type: {layer_cfg.type}")
-            self.layers.append(layer)
+        self.layers = layers
+
         self.model = nn.Sequential(*self.layers)
 
         self.swag_start = cfg.train.swag_start
-        self.update_interval = cfg.model.update_interval
-        self.max_cols = cfg.model.max_cols
+        self.update_interval = cfg.model.architecture.update_interval
+        self.max_cols = cfg.model.architecture.max_cols
         self.use_low_rank = cfg.train.use_low_rank
         self.steps = 0
         self.mean = None

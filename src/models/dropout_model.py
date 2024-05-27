@@ -17,22 +17,9 @@ class MCDropoutLayer(nn.Module):
 
 
 class MCDropoutNet(nn.Module):
-    def __init__(self, cfg):
+    def __init__(self, cfg, layers):
         super(MCDropoutNet, self).__init__()
-        self.layers = nn.ModuleList()
-        for layer_cfg in cfg.model.layers:
-            if layer_cfg.type == 'Linear':
-                layer = nn.Linear(
-                    in_features=layer_cfg.in_features,
-                    out_features=layer_cfg.out_features
-                )
-            elif layer_cfg.type == 'ReLU':
-                layer = nn.ReLU()
-            elif layer_cfg.type == 'MCDropoutLayer':
-                layer = MCDropoutLayer(cfg.model.dropout_prob)
-            else:
-                raise ValueError(f"Unsupported layer type: {layer_cfg.type}")
-            self.layers.append(layer)
+        self.layers = layers
         self.model = nn.Sequential(*self.layers)
 
 
