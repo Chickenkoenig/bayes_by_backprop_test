@@ -9,6 +9,8 @@ def plot_dataset(data, title):
     plt.ylabel("y")
     plt.show()
 
+
+
 #plot confidence intervalls
 def plot_model_results(x_test, y_test, train_data, mean_values, std_values, clean_target_func, cfg):
     x_train, y_train = train_data
@@ -23,7 +25,10 @@ def plot_model_results(x_test, y_test, train_data, mean_values, std_values, clea
     plt.xlabel('x')
     plt.ylabel('y')
 
-    wandb.log({"Prediction Plot": wandb.Image(plt)})
 
+    wandb.log({"Prediction Plot": wandb.Image(plt)})
     plt.show()
+
+
+
 

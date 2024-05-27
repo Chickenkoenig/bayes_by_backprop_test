@@ -9,7 +9,12 @@ defaults:
 
 seed: ???
 
-
+hydra:
+  run:
+    dir: ../output/hydra/training/${now:%Y-%m-%d}/${exp_name}
+  sweep:
+    dir: ../output/hydra/training/${now:%Y-%m-%d}
+    subdir: ${exp_name}/${recorder.wandb.job_type}/seed_${seed}
 
 
 

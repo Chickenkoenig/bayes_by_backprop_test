@@ -1,5 +1,0 @@
-- model.architecture.activation=ReLU
-- model.architecture.dropout_prob=0.1
-- train.epochs=8000
-- train.learning_rate=0.01
-- +experiment=large_sin_gap/dropout_ensemble_exp

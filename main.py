@@ -11,10 +11,7 @@ from src.config_parser.parser import parse_config
 def main(cfg: DictConfig):
     print(OmegaConf.to_yaml(cfg))
     config_dict = OmegaConf.to_container(cfg, resolve=True)
-    """
-    wandb.init(project='test_uncertainty_estimation',
-               name=cfg.exp_name, config=config_dict)
-    """
+
     wandb.init(project=cfg.recorder.wandb.project,
                job_type=cfg.recorder.wandb.job_type,
                group=cfg.recorder.wandb.group,
