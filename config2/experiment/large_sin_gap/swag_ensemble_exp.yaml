@@ -1,3 +1,4 @@
+# @package _global_
 defaults:
   - override /data: large_sin_gap
   - override /model: ensemble

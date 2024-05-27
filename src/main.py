@@ -4,8 +4,9 @@ import wandb
 import utils.train_utils as train_utils
 
 
-@hydra.main(config_path="../config2", config_name="main", version_base="1.1")
+@hydra.main(config_path="../config2", config_name="config", version_base="1.1")
 def main(cfg: DictConfig):
+    print(OmegaConf.to_yaml(cfg))
     config_dict = OmegaConf.to_container(cfg, resolve=True)
     wandb.init(project='test_uncertainty_estimation',
                name=f"{cfg.model.type if not cfg.use_ensemble else 'ensemble'}_{cfg.data.name}", config=config_dict)

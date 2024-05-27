@@ -1,14 +1,18 @@
+# @package _global_
 defaults:
   - override /data: large_sin_gap
   - override /model: ensemble
-  - override /model/ensemble_type: ensembles/bbb_ensemble
+  - override /model/ensembles: bbb_ensemble
   - override /train: base_train
 
-name: large_sin_gap_bbb_ensemble
+exp_name: large_sin_gap_bbb_ensemble
 
 
 
 hydra:
   sweeper:
     params:
-      model.ensemble_type.architecture.activation: 'ReLU', 'Tanh'
+      model.ensemble_type.architecture.activation: ['ReLU', 'Tanh']
+      model.ensemble_type.architecture.kl_weight: 0.01
+      train.epochs: 8000
+      train.learning_rate: 0.01
