@@ -1,0 +1,15 @@
+defaults:
+  - data: ???
+  - model: ???
+  - model/architecture: ???
+  - plot: default
+  - train: ???
+
+
+
+
+
+
+
+
+

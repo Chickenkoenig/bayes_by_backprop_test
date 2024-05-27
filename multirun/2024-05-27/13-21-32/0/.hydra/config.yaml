@@ -1,0 +1,48 @@
+data:
+  name: large_sin_gap
+  x_start: -6
+  x_end: 6
+  x_test_start: -8
+  x_test_end: 8
+  num_train_points: 1000
+  num_validation_points: 500
+  num_test_points: 700
+  gap: true
+  gap_start: -1.5
+  gap_end: 1.5
+  ground_truth: sin_clean_target
+  noisy_target: sin_noisy
+model:
+  type: single
+  architecture:
+    type: bbb
+    activation: ReLU
+    kl_weight: 0.01
+    layers:
+    - type: BayesLinear
+      prior_mu: 0
+      prior_sigma: 0.1
+      in_features: 1
+      out_features: 1000
+    - type: ${model.architecture.activation}
+    - type: BayesLinear
+      prior_mu: 0
+      prior_sigma: 0.1
+      in_features: 1000
+      out_features: 1
+plot:
+  figsize:
+  - 10
+  - 8
+  colors:
+    mean: navy
+    confidence: navy
+    test_set: darkorange
+    target_function: green
+  linewidth: 3
+  markersize: 4
+  alpha: 0.2
+train:
+  epochs: 8000
+  learning_rate: 0.01
+exp_name: large_sin_gap_bbb_ensemble

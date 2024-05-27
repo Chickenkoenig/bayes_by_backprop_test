@@ -1,0 +1,5 @@
+- model.architecture.activation=ReLU
+- model.architecture.kl_weight=0.01
+- train.epochs=8000
+- train.learning_rate=0.01
+- +experiment=large_sin_gap/bbb_ensemble_exp

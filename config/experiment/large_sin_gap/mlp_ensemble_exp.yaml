@@ -1,0 +1,17 @@
+# @package _global_
+defaults:
+  - override /data: large_sin_gap
+  - override /model: ensemble
+  - override /model/architecture: mlp
+  - override /model/ensemble_type: mlp_ensemble
+  - override /train: base_train
+
+exp_name: large_sin_gap_mlp_ensemble
+
+hydra:
+  mode: MULTIRUN
+  sweeper:
+    params:
+      model.architecture.activation: 'ReLU'
+      train.epochs: 8000
+      train.learning_rate: 0.01

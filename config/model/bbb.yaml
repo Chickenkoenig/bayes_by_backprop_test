@@ -1,8 +1,0 @@
-# Bayesian Neural Network specific parameters
-type: 'bbb'
-kl_weight: 0.01
-layers:
-  - {type: 'BayesLinear', prior_mu: 0, prior_sigma: 0.1, in_features: 1, out_features: 1000}
-  - {type: 'ReLU'}
-  - {type: 'BayesLinear', prior_mu: 0, prior_sigma: 0.1, in_features: 1000, out_features: 1}
-

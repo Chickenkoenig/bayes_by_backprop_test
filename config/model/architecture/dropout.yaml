@@ -1,0 +1,12 @@
+type: 'dropout'
+dropout_prob: ???
+activation: ???
+layers:
+  - type: 'Linear'
+    in_features: 1
+    out_features: 1000
+  - type: ${model.architecture.activation}
+  - type: 'MCDropoutLayer'
+  - type: 'Linear'
+    in_features: 1000
+    out_features: 1

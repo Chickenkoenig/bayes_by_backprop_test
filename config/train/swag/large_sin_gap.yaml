@@ -1,4 +1,0 @@
-epochs: 8000
-swag_start: 7000
-use_low_rank: true
-learning_rate: 0.01

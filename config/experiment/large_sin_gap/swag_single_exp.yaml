@@ -1,0 +1,18 @@
+# @package _global_
+defaults:
+  - override /data: large_sin_gap
+  - override /model: single_model
+  - override /model/architecture: swag
+  - override /train: base_train
+
+exp_name: large_sin_gap_swag_single
+
+hydra:
+  mode: MULTIRUN
+  sweeper:
+    params:
+      model.architecture.activation: 'ReLU'
+      model.architecture.update_interval: 5
+      model.architecture.max_cols: 5
+      train.epochs: 8000
+      train.learning_rate: 0.01

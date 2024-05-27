@@ -2,9 +2,9 @@ import hydra
 from omegaconf import DictConfig, OmegaConf
 import wandb
 import utils.train_utils as train_utils
+import os
 
-
-@hydra.main(config_path="../config2", config_name="config", version_base="1.1")
+@hydra.main(config_path="../config", config_name="config", version_base=None)
 def main(cfg: DictConfig):
     print(OmegaConf.to_yaml(cfg))
     config_dict = OmegaConf.to_container(cfg, resolve=True)
@@ -20,4 +20,5 @@ def main(cfg: DictConfig):
 
 
 if __name__ == '__main__':
+
     main()

@@ -1,7 +1,0 @@
-type: 'swag'
-update_interval: 5
-max_cols: 5
-layers:
-  - {type: 'Linear', in_features: 1, out_features: 300}
-  - {type: 'ReLU'}
-  - {type: 'Linear', in_features: 300, out_features: 1}
