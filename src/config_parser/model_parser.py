@@ -1,5 +1,5 @@
 
-
+from src.models.mlp_model import MLPModel
 from src.models.bbb_model import BBBModel
 from src.models.dropout_model import MCDropoutNet, MCDropoutLayer
 from src.models.swag_model import SwagModel
@@ -26,7 +26,7 @@ def parse_model(cfg):
     elif model_arch == "swag":
         return SwagModel(cfg, layers)
     elif model_arch == "mlp":
-        return MLP(cfg)
+        return MLPModel(layers)
 
 def parse_model_layers(cfg):
     layers = nn.ModuleList()
