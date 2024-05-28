@@ -19,4 +19,4 @@ hydra:
       model.architecture.activation: ReLU, Tanh
       train.epochs: 5000, 10000, 15000, 20000
       train.learning_rate: 0.01, 0.001
-      seed: 0
+      seed: 0, 5

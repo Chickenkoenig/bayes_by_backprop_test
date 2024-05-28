@@ -8,12 +8,12 @@ layers:
     prior_mu: 0
     prior_sigma: 0.1
     in_features: 1
-    out_features: 1000
+    out_features: 300
 
   - type: ${model.architecture.activation}
 
   - type: 'BayesLinear'
     prior_mu: 0
     prior_sigma: 0.1
-    in_features: 1000
+    in_features: 300
     out_features: 1
